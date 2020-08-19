@@ -59,21 +59,27 @@ class Container extends React.Component {
     console.log(user);*/
     const userWins = Math.abs(user - target) < Math.abs(computer - target);
     const winner = userWins ? "user wins" : "computer wins";
-
-    this.setState({ winner });
-    return winner;
+    const winnerIs = userWins ? "user" : "computer";
+    console.log();
+    this.setState({ winner, winnerIs });
+    return { winner, winnerIs };
   };
 
   /* updateScore() function. This function will be used to correctly increase the winner’
     s score after each round.*/
-  updateScore = (winner) => {};
+  updateScore = () => {
+    const score = this.state.score + 1;
+    this.setState({
+      score
+    });
+    return score;
+  };
   render() {
     return (
       <div className="container">
         <Header target={this.state.target} />
         <Computer
           score={this.state.score}
-          winner={this.winner}
           computer={this.state.computer}
           isWinner={this.state.winner}
         />
